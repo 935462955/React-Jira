@@ -33,6 +33,6 @@ export const useDebounce  = (value : any, delay ?: number) => {
 export const useMount = (callback : ()=> void) => {
     useEffect(()=>{
        callback() 
-    })
+    },[])
 }
     
