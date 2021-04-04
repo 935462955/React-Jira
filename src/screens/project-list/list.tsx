@@ -1,5 +1,15 @@
+import { User } from "screens/project-list/search-panel"
+interface Project{
+    id:string,
+    name:string,
+    personId:string
+}
+interface ListProps{
+    list: Project[],
+    users: User[]
+}
 
-export const List = ({users,list})=>{
+export const List = ({users,list}:ListProps)=>{
     return <table>
         <thead>
             <tr>
