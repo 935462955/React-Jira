@@ -18,7 +18,7 @@ export const cleanObject = (obj : Object) => { //去除URL search部分没有值
 }
 
 
-export const useDebounce  = (value : any, delay ?: number) => {
+export const useDebounce  = <V>(value : V, delay ?: number):V => {
    
     const [debouncedValue , setDebouncedValue] = useState(value)
    
