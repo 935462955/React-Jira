@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent,MouseEvent, useState} from "react"
 const apiUrl = process.env.REACT_APP_API_URL
 
 export const LoginScreen = ()=>{
-    const {login,register,user} = useAuth() //全局登录信息和方法
+    const {login,user} = useAuth() //全局登录信息和方法
     const handleSubmit = (event: FormEvent<HTMLFormElement> )=>{
          event.preventDefault()
          const username = (event.currentTarget.elements[0] as HTMLInputElement).value

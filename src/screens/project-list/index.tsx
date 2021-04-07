@@ -3,6 +3,7 @@ import {List} from './list'
 import {useState,useEffect} from 'react'
 import * as qs from 'qs'//url参数处理
 import {cleanObject,useMount,useDebounce} from '../../utils'
+import { useHttp } from 'utils/http'
 
 const apiUrl = process.env.REACT_APP_API_URL
 
@@ -14,24 +15,14 @@ export const ProjectListScreen = () => {
     })
     const [list,setList] = useState([])
     const debouncedParam = useDebounce(param , 2000)//当我们调用setParam React会再次渲染组件
-    useEffect(() => {
-        fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async response => {
-            
-            if(response.ok){
-                setList(await response.json())
-            }
-            
-        })
+    const client = useHttp()//异步请求fetch钩子
+    useEffect(() => { 
+        client('projects',{data:cleanObject(debouncedParam)}).then(setList) 
     },[debouncedParam])
-    
     
 
     useMount(()=>{
-        fetch(`${apiUrl}/users`).then( async response=>{
-            if(response.ok){
-                setUsers(await response.json())
-            }
-        })
+        client('users').then(setUsers)
     })
     return <div>
         <SearchPanel users = {users} param = {param} setParam = {setParam}/>
