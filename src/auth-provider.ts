@@ -8,12 +8,12 @@ export const getToken = () => {
     return token || ""
 }
 
-export const handleUserResponse = ({user}:{user:User})=> {
+export const handleUserResponse = ({user}:{user:User})=> { //保存token
     window.localStorage.setItem(localStorageKey, user.token || "")
     return user
 }
 
-export const login = (data : {username:string,password:string})=>{
+export const login = (data : {username:string,password:string})=>{//
     return fetch(`${apiUrl}/login`,{
         method:'POST',
         headers:{'Content-Type': 'application/json'},

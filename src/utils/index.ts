@@ -16,17 +16,18 @@ export const cleanObject = (obj : Object) => { //去除URL search部分没有值
     }
     return result
 }
-
-
+// value 
+// const debouncedvalue = useDebounce(value)
 export const useDebounce  = <V>(value : V, delay ?: number):V => {
    
     const [debouncedValue , setDebouncedValue] = useState(value)
-   
+
     useEffect(()=>{
         //每次在value变化以后，设置一个定时器
        const timeout = setTimeout(() => setDebouncedValue(value), delay)
        return  () => clearTimeout(timeout)
     },[value,delay])
+    
     return debouncedValue
 }
 

@@ -46,8 +46,12 @@ export const http =  async(endpoint:string,{data,token,headers,...customConfig}:
     })
 }
 
-export const useHttp = ()=>{
+export const useHttp = ()=>{//自动根据上下文填充token
     const {user} = useAuth()
     //参数类型是和http函数一样
+    // TS Utility Types的用法，利用泛型给它传入一个其他类型，然后utility type对这个类型进行某种操作
+    //TS 中的typeof 是在静态环境运行的
+    //
     return (...[endpoint,config]:Parameters<typeof http>) => http(endpoint,{...config,token:user?.token})
 }
+
